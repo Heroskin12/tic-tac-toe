@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./main.css">
+    <title>Tic Tac Toe</title>
+</head>
+<body>
+    <header>
+        <h1>Tic Tac Toe</h1>
+        <p>By Heroskin12</p>
+    </header>
+
+    <div class="container">        
+        <main>
+            <div class="field" data-type="0"></div>
+            <div class="field" data-type="1"></div>
+            <div class="field" data-type="2"></div>
+            <div class="field" data-type="3"></div>
+            <div class="field" data-type="4"></div>
+            <div class="field" data-type="5"></div>
+            <div class="field" data-type="6"></div>
+            <div class="field" data-type="7"></div>
+            <div class="field" data-type="8"></div>
+        </main>
+    </div>
+
+    <section id="playerInfo">
+        <form action="#">
+            <label for="name_input">Enter name...</label>
+            <input type="text" name="name_input" id="name_input">
+
+            <div>
+                <button type="button" id="oButton"><i class="fa-regular fa-circle"></i></button>
+                <button type="button" id="xButton"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            
+            <button id="submitButton" type="button">Submit</button>
+        </form>
+
+    </section>
+    <script src="./main.js"></script>
+    <script src="https://kit.fontawesome.com/5ed879b221.js" crossorigin="anonymous"></script>
+</body>
+</html>
