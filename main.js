@@ -1,76 +1,65 @@
-const Player = (name, marker) => {
-    const playerName = name;
-    const playerMarker = marker;
-    const turn = false;    
-    return {name, marker, turn}
+// Factory function returning player objects.
+let playerFactory = (name, marker) => {
+    let turn = false;
+    // Is this necessary?
+    let changeTurn = function() {
+        if (turn === true) {
+            turn = false;
+        }
+        else {
+            turn = true;
+        }
+    }
+    let addMarker = function() {
+
+    }
+
+    // Added provisionally to print winner or loser messages.
+    let win = () => { name;
+    console.log(`${name} is the winner!`)
+    }
+    let lose = () => { name;
+        console.log(`${name} is the loser!`)
+    }
+
+    return {name, marker, changeTurn, addMarker, lose}
 }
+
+
 // Gameboard Module
-(function() {
+// Any values returned can be access via gameBoardModule.XXXX. If returned variable is function then add ().
+let gameBoardModule = (function() {
+    let gameboard = [];
 
-    const gameBoard = {
-        gameboard: [], //['O', 'X', 'O', 'O', 'X', 'X', 'O', 'O', 'X'],
-        players: [],
-        init: function() {
-            for (let i = 0; i < 9; i++) {
-                this.gameboard[i] = "";
-            }            
-            this.cacheDom();
-            //this.container.style = 'display: block';
-            //this.playerInfo.style = 'display: none';
-            this.render();
-            
-        },
-        cacheDom: function() {
-            this.container = document.querySelector('.container');
-            this.playerInfo = document.querySelector('#playerInfo');
-            this.submitButton = document.querySelector('#submitButton');
-            this.oButton = document.querySelector('#oButton');
-            this.xButton = document.querySelector('#xButton');
-            this.input = document.querySelector('#name_input');
-            this.squares = Array.from(document.querySelectorAll('.field'));
-        },
-        addPlayers: function() {
-            console.log("BUMBUM");
-            let marker, marker2;
-            if (this.oButton.style.backgroundColor === "green") {
-                marker = "O";
-                marker2 = "X";
-            }
-            else {
-                marker = "X";
-                marker2 = "O";
-            }
-            console.log(Player);
-
-            return "peepee"
-        },
-        render: function() {
-            let i = 0;
-            this.squares.forEach(square => {
-                square.innerHTML = this.gameboard[i];
-                i++;
-            }
-        )},
-        bindEvents: (function() {
-            this.oButton.addEventListener('click', () => {
-                this.oButton.style.backgroundColor = "green";
-                this.xButton.style.backgroundColor = "red";
-            })
-
-            this.xButton.addEventListener('click', () => {
-                this.xButton.style.backgroundColor = "green";
-                this.oButton.style.backgroundColor = "red";
-            })
-
-            this.submitButton.addEventListener('click', () => {
-                this.addPlayers().bind(gameBoard);
-            })
-           
-        })(),
-
-}
-
-    gameBoard.init()
+    // Initialise gameboard array to empty. Perhaps an unnecessary step. Can be altered when creating function for allowing player to add to square.
+    let createGameBoard = () => {
+        let squares = document.querySelectorAll('.square');
+        let i = 0;
+        squares.forEach(square => {
+            gameboard[i] = "X";
+            square.textContent = gameboard[i];
+            i++;
+        })
+        
+    }
     
+    
+    return {createGameBoard};
 })()
+
+//gameBoardModule.createGameBoard(); - This will initialise the grid array.
+
+// Display Controller Module
+let displayController = (function() {
+
+    console.log("display controller is working correctly...")
+})()
+
+
+
+
+
+
+
+
 

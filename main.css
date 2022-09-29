@@ -1,68 +1,161 @@
+@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
+
+/* Reset */
 * {
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
 
+/* Set up Background Image & Position Central Div */
+main {
+    background: url("./images/union.jpg") no-repeat center center/cover;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: "Courgette", cursive;
+}
+
+/* Organize content in the div */
 .container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #333;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgb(228, 207, 18) 0px -12px 30px, rgb(228, 207, 18) 0px 4px 6px, rgb(228, 207, 18) 0px 12px 13px, rgb(228, 207, 18) 0px -3px 5px;
+    padding: 2rem;
+    color: #fff;
     display: none;
 }
 
-header {
+/* Organize positioning of the fish and chips icons. */
+.img-container {
     display: flex;
-    flex-direction: column;
+    flex-direction: column;    
     justify-content: center;
     align-items: center;
-    background: rgb(175, 170, 170);
-    padding: 2rem;
-}
-
-#playerInfo {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 2rem;
-}
-
-
-form {
-    display: flex;
-    flex-direction: column;
-}
-
-form div {
-    margin-top: 10px;
-    display: flex;
-    justify-content: center;
-}
-
-form > div > button {
-    padding: 3rem;
-}
-
-main {
-    display: grid;
-    grid-template-columns: repeat(3, 200px);
-    justify-content: center;
-    align-items: center;
-    padding: 2rem;
-}
-
-.field {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     text-align: center;
-    height: 200px;
-    background: #333;
-    border-left: 1px solid #fff;
-    border-top: 1px solid #fff;
-    font-size: 3rem;
-    color: #fff;
-    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    padding: 2rem;
 }
 
-.field:hover {
-    background: rgb(71, 71, 71);
+.img-container > h3 {    
+    font-size: 1.7rem;
+}
+
+.choices {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-content: center;
+    align-items: center;    
+}
+
+.choices > div {
+    padding: 2rem;
+}
+.fish img {
+    height: 150px;
+}
+
+.chips img {
+    height: 100px;
+}
+
+.fish img:hover, .chips img:hover {
+    transform: scale(1.2);
     cursor: pointer;
 }
+
+/* Input */
+.player_config {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.player_config > *{
+    padding: 1rem;
+}
+
+.player_names {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+}
+
+
+input {
+    padding: 10px;
+    border-radius: 5px;
+}
+
+input:focus {
+    outline: 2px solid yellow;
+}
+
+.player_config p {
+    font-size: 1.2rem;
+    color: #333;
+    /* Created with https://www.css-gradient.com */
+    background: #FFDF23;
+    background: -webkit-linear-gradient(top left, #FFDF23, #E5E077);
+    background: -moz-linear-gradient(top left, #FFDF23, #E5E077);
+    background: linear-gradient(to bottom right, #FFDF23, #E5E077);
+    padding: 10px 20px;
+    margin-bottom: 20px;
+}
+
+.player_config p span:hover {
+    cursor: pointer;
+    font-size: 1.4rem;
+    color: #fff;
+}
+
+button {
+    width: 100%;
+    background: yellow;
+    color: #333;
+    font-size: 20px;
+    font-family: "Courgette", cursive;
+}
+
+button:hover {
+    background-color: yellowgreen;
+    cursor: pointer;
+    color: #fff;
+}
+
+/* GameBoard Container */
+
+
+.gameboard_container {
+    background: #333;
+    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgb(228, 207, 18) 0px -12px 30px, rgb(228, 207, 18) 0px 4px 6px, rgb(228, 207, 18) 0px 12px 13px, rgb(228, 207, 18) 0px -3px 5px;
+    padding: 2rem;
+    text-align: center;
+    color: #fff;
+    font-size: 1.3rem;
+
+}
+.gameboard {
+    display: grid;
+    grid-template-columns: repeat(3, 200px);
+    grid-auto-rows: 200px;
+    padding: 20px;
+}
+
+.gameboard .square {
+    border: 1px solid #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3rem;
+}
+
+.gameboard .square:hover {
+    cursor: pointer;
+    background: rgb(94, 93, 93);
+}
+
