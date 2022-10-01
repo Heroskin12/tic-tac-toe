@@ -68,7 +68,7 @@ let displayController = (function() {
             PlayerFactory(); // Create the players.
             changeDisplay(); // Show the grid.
             gameInit(); // Initialise gameboard array to 9 empty strings.
-            takeTurn(); // Add event listeners to each square.
+            eventListener();
         })
     }
 
@@ -110,13 +110,46 @@ let displayController = (function() {
         }
     }
 
-    let takeTurn = () => {
+    // Loop through squares array and add click event listeners for each.
+    let eventListener = () => {
         squares = document.querySelectorAll('.square');
-        for (const square of squares) {
-            square.addEventListener('click', () => {
+        squares = Array.from(squares);
+        for (let i = 0; i < 9; i++) {
+            squares[i].addEventListener('click', () => {
+                if (squares[i].classList.contains('off')) {
+                    return;
+                }
+                takeTurn(squares[i]);
+                let marker = gameBoardModule.gameboard[i];
+                console.log(marker)
+                let result = checkWinner(marker);
+
+                if (result === true) {
+                    if (gameBoardModule.playerArray[0].marker == marker) {
+                        console.log("Player 1 Wins!")
+                        stopGame(squares)
+                    }                    
+                    else {
+                        console.log("Player 2 Wins!")
+                        stopGame(squares)
+                    }
+                }
+                else if (result === false && !gameBoardModule.gameboard.includes("")) {
+                    stopGame(squares);
+                    console.log('tie');
+                }
+
+            })
+        }
+    }
+
+    // Function called whenever a square is clicked to register a turn.
+    let takeTurn = (square) => {
+        console.log(square);
+        
                 const index = square.getAttribute('data-type')
 
-                if (square.innerHTML != "") return;
+                if (square.innerHTML !== "") return;
                 
                 if (gameBoardModule.playerArray[0].turn === true) {
                     if (gameBoardModule.playerArray[0].marker === "fish") {
@@ -142,39 +175,48 @@ let displayController = (function() {
                     gameBoardModule.playerArray[1].turn = false;
                     gameBoardModule.playerArray[0].turn = true;
                     
-                }
-                console.log(gameBoardModule.gameboard)
-            })
-            
-        }}
-
-        let checkWinner = () => {
-            let winnerCombos = [
-                // Horizontal
-                [0, 1, 2],
-                [3, 4, 5],
-                [6, 7, 8],
-
-                // Vertical
-                [0, 3, 6],
-                [1, 4, 7],
-                [2, 5, 8],
-
-                // Diagonal
-                [0, 4, 8],
-                [2, 4, 6]
-            ]
-
-                for (let i = 0; i < 9; i+3) {
-                    let rowValue = gameBoardModule.gameboard[i];
-                    if (rowValue === gameBoardModule.gameboard[i+1] && gameBoardModule.gameboard[i+2]) {
-                        return true;
-                    }
-                    continue;
-                }
-            
-
+                }         
         }
+
+        let checkWinner = (marker) => {
+            
+            // Creates array with all possible win combinations.
+            let horizontal = [0, 3, 6].map(i => {return [i, i+1, i+2]});
+            let vertical = [0, 1, 2].map(i=>{return [i, i+3, i+6]});
+            let diagonal = [[0, 4, 8], [2, 4, 6]]
+            let allWins = [].concat(horizontal).concat(vertical).concat(diagonal)
+
+            let result = allWins.some(win => {
+                return gameBoardModule.gameboard[win[0]] == marker && gameBoardModule.gameboard[win[1]] == marker && gameBoardModule.gameboard[win[2]] == marker
+            })
+            console.log(result)
+            return result
+            
+        // Diagonal
+        //if (gameBoardModule.gameboard[0] !== "" && (gameBoardModule.gameboard[0] === gameBoardModule.gameboard[4] && gameBoardModule.gameboard[8])) return true
+        //else if (gameBoardModule.gameboard[2] !== "" && (gameBoardModule.gameboard[2] === gameBoardModule.gameboard[4] && gameBoardModule.gameboard[6])) return true
+
+        // Horizontal
+        //if (gameBoardModule.gameboard[0] !== "" && (gameBoardModule.gameboard[0] === gameBoardModule.gameboard[1] && gameBoardModule.gameboard[2]))  return true
+        //else if (gameBoardModule.gameboard[3] !== "" && (gameBoardModule.gameboard[3] === gameBoardModule.gameboard[4] && gameBoardModule.gameboard[5])) return true
+        //else if (gameBoardModule.gameboard[6] !== "" && (gameBoardModule.gameboard[6] === gameBoardModule.gameboard[7] && gameBoardModule.gameboard[8])) return true
+
+        // Vertical 
+        //if (gameBoardModule.gameboard[0] !== "" && (gameBoardModule.gameboard[0] === gameBoardModule.gameboard[3] && gameBoardModule.gameboard[6]))  return true
+        //else if (gameBoardModule.gameboard[1] !== "" && (gameBoardModule.gameboard[1] === gameBoardModule.gameboard[4] && gameBoardModule.gameboard[7]))  return true
+        //else if (gameBoardModule.gameboard[2] !== "" && (gameBoardModule.gameboard[2] === gameBoardModule.gameboard[5] && gameBoardModule.gameboard[8]))  return true
+        //console.log(gameBoardModule.gameboard[i])
+
+        //return false;
+        }
+
+        let stopGame = (squares) => {
+            for (let i =  0; i<9; i++) {
+                squares[i].classList.add('off')
+            }
+        }
+
+        
         
         
         
