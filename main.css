@@ -27,7 +27,6 @@ main {
     box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgb(228, 207, 18) 0px -12px 30px, rgb(228, 207, 18) 0px 4px 6px, rgb(228, 207, 18) 0px 12px 13px, rgb(228, 207, 18) 0px -3px 5px;
     padding: 2rem;
     color: #fff;
-    display: none;
 }
 
 /* Organize positioning of the fish and chips icons. */
@@ -128,7 +127,9 @@ button:hover {
 }
 
 /* GameBoard Container */
-
+.container2 {
+    display: none;
+}
 
 .gameboard_container {
     background: #333;
@@ -159,3 +160,6 @@ button:hover {
     background: rgb(94, 93, 93);
 }
 
+.square > img {
+    height: 100px;
+}
