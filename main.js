@@ -125,18 +125,19 @@ let displayController = (function() {
                 let result = checkWinner(marker);
 
                 if (result === true) {
+                    console.log("Result is true!")
                     if (gameBoardModule.playerArray[0].marker == marker) {
-                        console.log("Player 1 Wins!")
-                        stopGame(squares)
+                        winnerText(0);
+                        stopGame(squares);
                     }                    
                     else {
-                        console.log("Player 2 Wins!")
-                        stopGame(squares)
+                        winnerText(1);
+                        stopGame(squares);
                     }
                 }
                 else if (result === false && !gameBoardModule.gameboard.includes("")) {
                     stopGame(squares);
-                    console.log('tie');
+                    winnerText(2);
                 }
 
             })
@@ -191,30 +192,61 @@ let displayController = (function() {
             })
             console.log(result)
             return result
-            
-        // Diagonal
-        //if (gameBoardModule.gameboard[0] !== "" && (gameBoardModule.gameboard[0] === gameBoardModule.gameboard[4] && gameBoardModule.gameboard[8])) return true
-        //else if (gameBoardModule.gameboard[2] !== "" && (gameBoardModule.gameboard[2] === gameBoardModule.gameboard[4] && gameBoardModule.gameboard[6])) return true
-
-        // Horizontal
-        //if (gameBoardModule.gameboard[0] !== "" && (gameBoardModule.gameboard[0] === gameBoardModule.gameboard[1] && gameBoardModule.gameboard[2]))  return true
-        //else if (gameBoardModule.gameboard[3] !== "" && (gameBoardModule.gameboard[3] === gameBoardModule.gameboard[4] && gameBoardModule.gameboard[5])) return true
-        //else if (gameBoardModule.gameboard[6] !== "" && (gameBoardModule.gameboard[6] === gameBoardModule.gameboard[7] && gameBoardModule.gameboard[8])) return true
-
-        // Vertical 
-        //if (gameBoardModule.gameboard[0] !== "" && (gameBoardModule.gameboard[0] === gameBoardModule.gameboard[3] && gameBoardModule.gameboard[6]))  return true
-        //else if (gameBoardModule.gameboard[1] !== "" && (gameBoardModule.gameboard[1] === gameBoardModule.gameboard[4] && gameBoardModule.gameboard[7]))  return true
-        //else if (gameBoardModule.gameboard[2] !== "" && (gameBoardModule.gameboard[2] === gameBoardModule.gameboard[5] && gameBoardModule.gameboard[8]))  return true
-        //console.log(gameBoardModule.gameboard[i])
-
-        //return false;
         }
 
         let stopGame = (squares) => {
             for (let i =  0; i<9; i++) {
                 squares[i].classList.add('off')
             }
+
+            
         }
+
+        let winnerText = (i) => {
+            let parent = document.querySelector('.container2');
+            let winnerText = document.createElement('div');
+            // Add a winner announcement.
+            winnerText.classList.add('winner');
+            if (i === 2) {
+                winnerText.innerHTML = `It's a tie!`;
+            }
+            else {
+                winnerText.innerHTML = `${gameBoardModule.playerArray[i].name} wins!`;
+            }
+            parent.appendChild(winnerText);
+
+            // Add a play again button.
+            let playAgain = document.createElement('div');
+            playAgain.classList.add('replay');
+            winnerText.appendChild(playAgain);
+            let replayButton = document.createElement('button');
+            replayButton.innerText = "Play Again?";
+            playAgain.appendChild(replayButton);
+            replayButton.addEventListener('click', restart);
+            
+        }
+
+        let restart = () => {
+            // Empty the gameboard array.
+            for (let i = 0; i<9; i++) {
+                gameBoardModule.gameboard[i] = ""
+            }
+            gameBoardModule.playerArray[0].turn = true;
+            gameBoardModule.playerArray[1].turn = false;
+            // Remove the winner text.
+            let winnerText = document.querySelector('.winner')
+            let parent = document.querySelector('.container2');
+            squares = document.querySelectorAll('.square');
+            squares = Array.from(squares);
+            for (let i = 0; i < 9; i++) {
+                squares[i].innerHTML = "";
+                squares[i].classList.remove('off')
+            }
+            parent.removeChild(winnerText)
+            
+        }
+
+        
 
         
         
