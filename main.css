@@ -9,7 +9,7 @@
 
 /* Set up Background Image & Position Central Div */
 main {
-    background: url("./images/union.jpg") no-repeat center center/cover;
+    background: url("./images/union2.jpg") no-repeat center center/cover;
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -129,15 +129,17 @@ button:hover {
 /* GameBoard Container */
 .container2 {
     display: none;
+    position: absolute;
+    top: 0;
+    bottom: 0;
 }
 
 .gameboard_container {
-    background: #333;
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgb(228, 207, 18) 0px -12px 30px, rgb(228, 207, 18) 0px 4px 6px, rgb(228, 207, 18) 0px 12px 13px, rgb(228, 207, 18) 0px -3px 5px;
-    padding: 2rem;
     text-align: center;
     color: #fff;
     font-size: 1.3rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
 
 }
 .gameboard {
@@ -147,12 +149,36 @@ button:hover {
     padding: 20px;
 }
 
+#section_one, #section_three {
+    background: #333;
+    width: 500px;    
+}
+
+#section_two {
+    margin-top: 30px;
+}
+
+#section_three {
+    position: absolute;
+    text-align: center;
+    right: 0;
+    top: 0;
+    bottom: 0;
+}
+
+#section_one h3, #section_three h3 {
+    font-size: 2rem;
+    text-align: center;
+    margin-top: 50%;
+}
+
 .gameboard .square {
     border: 1px solid #fff;
     display: flex;
     justify-content: center;
     align-items: center;
     font-size: 3rem;
+    background: rgba(0, 0, 0, 0.6)
 }
 
 .gameboard .square:hover {

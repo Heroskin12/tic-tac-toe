@@ -78,6 +78,8 @@ let displayController = (function() {
         const container2 = document.querySelector('.container2');
         container.style.display = "none";
         container2.style.display = "flex";
+        document.querySelector('#section_one h3').innerHTML = gameBoardModule.playerArray[0].name;
+        document.querySelector('#section_three h3').innerHTML = gameBoardModule.playerArray[1].name;
     }
 
     // Adds green border around the fish and chip icons to highlight user selection.
@@ -105,6 +107,7 @@ let displayController = (function() {
     // Set to Player 1 Turn & Initialise gameboard array with empty strings.
     let gameInit = () => {
         gameBoardModule.playerArray[0].turn = true;
+        document.querySelector('#section_one').style.border = "2px solid yellow";
         for (let i = 0; i < 9; i++) {
             gameBoardModule.gameboard[i] = "";
         }
@@ -149,6 +152,8 @@ let displayController = (function() {
         console.log(square);
         
                 const index = square.getAttribute('data-type')
+                const sectionOne = document.querySelector('#section_one');
+                const sectionThree = document.querySelector('#section_three');
 
                 if (square.innerHTML !== "") return;
                 
@@ -162,7 +167,9 @@ let displayController = (function() {
                         gameBoardModule.gameboard[index] = "chips"
                     }
                     gameBoardModule.playerArray[0].turn = false;
+                    sectionOne.style.border = "none"
                     gameBoardModule.playerArray[1].turn = true;
+                    sectionThree.style.border = "2px solid yellow"
                 }
                 else {
                     if (gameBoardModule.playerArray[1].marker === "fish") {
@@ -174,7 +181,9 @@ let displayController = (function() {
                         gameBoardModule.gameboard[index] = "chips";
                     }
                     gameBoardModule.playerArray[1].turn = false;
+                    sectionThree.style.border = "none"
                     gameBoardModule.playerArray[0].turn = true;
+                    sectionOne.style.border = "2px solid yellow"
                     
                 }         
         }
@@ -203,7 +212,7 @@ let displayController = (function() {
         }
 
         let winnerText = (i) => {
-            let parent = document.querySelector('.container2');
+            let parent = document.querySelector('#section_two');
             let winnerText = document.createElement('div');
             // Add a winner announcement.
             winnerText.classList.add('winner');
@@ -235,7 +244,7 @@ let displayController = (function() {
             gameBoardModule.playerArray[1].turn = false;
             // Remove the winner text.
             let winnerText = document.querySelector('.winner')
-            let parent = document.querySelector('.container2');
+            let parent = document.querySelector('#section_two');
             squares = document.querySelectorAll('.square');
             squares = Array.from(squares);
             for (let i = 0; i < 9; i++) {
@@ -243,6 +252,8 @@ let displayController = (function() {
                 squares[i].classList.remove('off')
             }
             parent.removeChild(winnerText)
+            document.querySelector('#section_one').style.border = "2px solid yellow";
+            document.querySelector('#section_three').style.border = "none";
             
         }
 
